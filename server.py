@@ -1,12 +1,5 @@
 import asyncio
-
-async def factorial_func(num):
-    result = 1
-
-    for i in range(1, num+1):
-        result *= i
-
-    return result
+from calculate_factorial import get_factorial
 
 async def handle_connection(reader, writer):
     addr = writer.get_extra_info("peername")
@@ -25,7 +18,7 @@ async def handle_connection(reader, writer):
 
         try:
             num = int(message)
-            fac = await factorial_func(num)
+            fac = await get_factorial(num)
             print(f"Received {num} from: {addr}")
         except ValueError:
             fac = 'Not a number'
